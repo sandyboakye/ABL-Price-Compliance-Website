@@ -2,20 +2,26 @@
     height: 100%;
     display: flex;
     flex-direction: column;
-    background: var(--color-bg-secondary);
+    /* Glassmorphism Base */
+    background: rgba(30, 41, 59, 0.95);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
     overflow: hidden;
 }
 
 /* Header */
 .sidebar-header {
     padding: var(--spacing-xl);
-    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
-    border-bottom: 1px solid var(--color-border);
-    box-shadow: var(--shadow-md);
+    /* Frosted Gradient */
+    background: linear-gradient(135deg, rgba(255, 198, 0, 0.9) 0%, rgba(204, 159, 0, 0.9) 100%);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: var(--spacing-md);
+    z-index: 10;
 }
 
 /* Mobile Close Button (Hidden on Desktop) */
@@ -128,14 +134,15 @@
 
 /* List Items */
 .list-item {
-    padding: var(--spacing-md) var(--spacing-lg);
-    background: var(--color-surface);
-    border: 1px solid var(--color-border);
+    padding: var(--spacing-lg);
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.05);
     border-radius: var(--radius-lg);
-    transition: all var(--transition-base);
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     animation: slideIn var(--transition-base) ease-out;
     position: relative;
     overflow: hidden;
+    backdrop-filter: blur(4px);
 }
 
 .list-item::before {
@@ -159,10 +166,15 @@
 }
 
 .list-item.clickable:hover {
-    background: var(--color-surface-elevated);
-    border-color: var(--color-border-hover);
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 198, 0, 0.3);
     transform: translateX(4px);
-    box-shadow: var(--shadow-md);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.list-item.clickable:active {
+    transform: scale(0.98) translateX(4px);
+    background: rgba(255, 198, 0, 0.1);
 }
 
 .list-item.clickable:active {
