@@ -3,7 +3,7 @@ import './App.css';
 import HomePage from './HomePage';
 import Sidebar from './Sidebar';
 import SearchBar from './SearchBar';
-import { Filter as FilterIcon, BarChart2 as BarChartIcon, Trash2 as TrashIcon } from 'lucide-react';
+import { Filter as FilterIcon, BarChart2 as BarChartIcon, Trash2 as TrashIcon, Menu as MenuIcon } from 'lucide-react';
 import MapComponent from './components/Map';
 import CompareModal from './components/CompareModal';
 import FilterPanel from './components/FilterPanel';
@@ -49,6 +49,7 @@ function App() {
   // View State
   const [currentView, setCurrentView] = useState('home'); // 'home' or 'map'
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false); // Mobile sidebar state
 
   // Navigation State
   const [selectedRegion, setSelectedRegion] = useState(null);
@@ -144,6 +145,9 @@ function App() {
     setSelectedRegion(regionId);
     setSelectedDistrict(null);
     setSelectedPub(null);
+    // On mobile, keep sidebar open to selection or close? Maybe keep open for detailed selection.
+    // If selecting a pub (leaf node), maybe close sidebar?
+    // Let's leave it to user to close or if they select a pub we might auto close in handleSelectPub?
   };
 
   const handleSelectDistrict = (districtId) => {
@@ -153,6 +157,10 @@ function App() {
 
   const handleSelectPub = (pubId) => {
     setSelectedPub(pubId);
+    // Auto-close sidebar on mobile when a pub is selected to show it on map
+    if (window.innerWidth <= 768) {
+      setIsSidebarOpen(false);
+    }
   };
 
   const handleBack = (currentView) => {
@@ -197,6 +205,10 @@ function App() {
     setSelectedRegion(result.regionId);
     if (result.districtId) setSelectedDistrict(result.districtId);
     if (result.pubId) setSelectedPub(result.pubId);
+    // Setup for mobile view if result found
+    if (window.innerWidth <= 768) {
+      setIsSidebarOpen(false); // Show map result
+    }
   };
 
   const handleGoHome = () => {
@@ -222,7 +234,13 @@ function App() {
         />
       ) : (
         <>
-          <div className="sidebar-wrapper">
+          {/* Mobile Backdrop */}
+          <div
+            className={`sidebar-backdrop ${isSidebarOpen ? 'visible' : ''}`}
+            onClick={() => setIsSidebarOpen(false)}
+          />
+
+          <div className={`sidebar-wrapper ${isSidebarOpen ? 'mobile-open' : ''}`}>
             <Sidebar
               mockData={filteredData}
               selectedRegion={selectedRegion}
@@ -236,10 +254,35 @@ function App() {
               compareList={compareList}
               onOpenSearch={() => setIsSearchOpen(true)}
               onGoHome={handleGoHome}
+              onClose={() => setIsSidebarOpen(false)}
             />
           </div>
 
           <div className="map-wrapper">
+            {/* Mobile Menu Button - Left aligned */}
+            <button
+              onClick={() => setIsSidebarOpen(true)}
+              style={{
+                position: 'absolute',
+                top: '20px',
+                left: '20px',
+                zIndex: 1000,
+                background: 'white',
+                border: 'none',
+                padding: '10px',
+                borderRadius: '8px',
+                boxShadow: '0 2px 8px rgba(0,0,0,0.15)',
+                cursor: 'pointer',
+                color: '#333',
+                display: 'flex', // Only flex, hide via media query in CSS if needed, or JS check
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}
+              className="mobile-menu-btn" // We will add CSS to hide this on desktop
+            >
+              <MenuIcon size={24} />
+            </button>
+
             <button
               className="filter-toggle-btn"
               onClick={() => setIsFilterOpen(!isFilterOpen)}

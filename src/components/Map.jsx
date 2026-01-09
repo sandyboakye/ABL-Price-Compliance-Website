@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { MapContainer, TileLayer, Marker, Popup, GeoJSON, useMap } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, Popup, GeoJSON, useMap, ZoomControl } from 'react-leaflet';
 import MarkerClusterGroup from 'react-leaflet-cluster';
 import 'leaflet/dist/leaflet.css';
 import './Map.css';
@@ -103,11 +103,13 @@ const MapComponent = ({ mockData, selectedRegion, selectedDistrict, selectedPub,
                 style={{ height: '100%', width: '100%' }}
                 maxBounds={ghanaBounds}
                 minZoom={6}
+                zoomControl={false} // Disable default top-left
             >
                 <TileLayer
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
+                <ZoomControl position="bottomright" />
 
                 <MapController
                     selectedRegion={selectedRegion}

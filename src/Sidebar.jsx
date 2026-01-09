@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { Home, Search } from 'lucide-react';
+import { Home, Search, X } from 'lucide-react';
 import './Sidebar.css';
 
 const Sidebar = ({
@@ -14,7 +14,8 @@ const Sidebar = ({
     onToggleCompare,
     compareList,
     onOpenSearch,
-    onGoHome
+    onGoHome,
+    onClose // New prop
 }) => {
     // Helpers
     const currentRegion = useMemo(() =>
@@ -195,11 +196,18 @@ const Sidebar = ({
                         ABL Price Check
                     </div>
                 </div>
-                {onOpenSearch && (
-                    <button className="search-trigger-btn" onClick={onOpenSearch} title="Search (Ctrl+K)">
-                        <Search size={20} />
-                    </button>
-                )}
+                <div style={{ display: 'flex', gap: '8px' }}>
+                    {onOpenSearch && (
+                        <button className="search-trigger-btn" onClick={onOpenSearch} title="Search (Ctrl+K)">
+                            <Search size={20} />
+                        </button>
+                    )}
+                    {onClose && (
+                        <button className="mobile-close-btn" onClick={onClose} title="Close Sidebar">
+                            <X size={20} />
+                        </button>
+                    )}
+                </div>
             </div>
             <div className="sidebar-content">
                 {content}
