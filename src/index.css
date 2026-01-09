@@ -1,51 +1,53 @@
 :root {
-  /* ABInBev / Brewery Theme Colors */
-  --color-primary: #FFC600;
-  /* Brewery Gold */
-  --color-primary-dark: #cc9f00;
-  --color-primary-light: #ffdb4d;
+  /* ABL Theme Colors */
+  --color-primary: #008751;
+  /* ABL/Ghana Green */
+  --color-primary-dark: #006039;
+  --color-primary-light: #4ade80;
 
-  --color-accent: #f59e0b;
-  /* Amber */
-  --color-accent-dark: #d97706;
+  --color-accent: #FFC600;
+  /* Gold Accent */
+  --color-accent-dark: #cc9f00;
 
-  /* Dark Theme Backgrounds */
-  --color-bg-primary: #0f172a;
-  /* Deep Blue/Black */
-  --color-bg-secondary: #1e293b;
-  /* Slate 800 */
-  --color-bg-tertiary: #334155;
-  /* Slate 700 */
+  /* Light Theme Backgrounds */
+  --color-bg-primary: #F8FAFC;
+  /* Light Gray/White */
+  --color-bg-secondary: #FFFFFF;
+  /* Pure White */
+  --color-bg-tertiary: #E2E8F0;
+  /* Light Gray border/bg */
 
   /* Surfaces */
-  --color-surface: rgba(30, 41, 59, 0.95);
-  /* Glassmorphism dark */
-  --color-surface-elevated: rgba(51, 65, 85, 0.9);
+  --color-surface: rgba(255, 255, 255, 0.9);
+  --color-surface-elevated: #FFFFFF;
 
   /* Text colors */
-  --color-text-primary: #f8fafc;
-  /* Slate 50 */
-  --color-text-secondary: #cbd5e1;
-  /* Slate 300 */
+  --color-text-primary: #0f172a;
+  /* Slate 900 */
+  --color-text-secondary: #475569;
+  /* Slate 600 */
   --color-text-muted: #94a3b8;
   /* Slate 400 */
-  --color-text-inverse: #0f172a;
+  --color-text-inverse: #ffffff;
 
   /* Semantic colors */
-  --color-success: #10b981;
-  --color-warning: #f59e0b;
-  --color-error: #ef4444;
+  --color-success: #166534;
+  /* Green 800 */
+  --color-warning: #d97706;
+  /* Amber 600 */
+  --color-error: #dc2626;
+  /* Red 600 */
 
   /* Borders & dividers */
-  --color-border: rgba(255, 198, 0, 0.15);
-  --color-border-hover: rgba(255, 198, 0, 0.4);
+  --color-border: #e2e8f0;
+  --color-border-hover: #cbd5e1;
 
-  /* Shadows */
-  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.6), 0 2px 4px -1px rgba(0, 0, 0, 0.5);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.7), 0 4px 6px -2px rgba(0, 0, 0, 0.6);
-  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.8), 0 10px 10px -5px rgba(0, 0, 0, 0.7);
-  --shadow-glow: 0 0 15px rgba(255, 198, 0, 0.15);
+  /* Shadows (Softer for light theme) */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  --shadow-glow: 0 0 15px rgba(0, 135, 81, 0.2);
 
   /* Spacing */
   --spacing-xs: 0.25rem;

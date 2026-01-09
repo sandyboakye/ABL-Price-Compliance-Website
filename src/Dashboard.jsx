@@ -1,16 +1,15 @@
-
 import React from 'react';
 import {
     BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer,
     PieChart, Pie, Cell
 } from 'recharts';
-import { ArrowLeft } from 'lucide-react';
+import { Home, ArrowLeft } from 'lucide-react';
 import './Dashboard.css';
 
-const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#8884d8', '#82ca9d'];
-const COMPLIANCE_COLORS = ['#22c55e', '#ef4444']; // Green, Red
+const COLORS = ['#008751', '#FFC600', '#006039', '#4ade80', '#d97706', '#166534']; // ABL Green/Gold Palette
+const COMPLIANCE_COLORS = ['#008751', '#dc2626']; // ABL Green, Red
 
-const Dashboard = ({ data, onBack }) => {
+const Dashboard = ({ data, onBack, onGoHome }) => {
 
     // 1. Prepare Data: Outlets per Region
     const regionStats = {};
@@ -40,8 +39,7 @@ const Dashboard = ({ data, onBack }) => {
     const allPubs = data.flatMap(d => d.districts).flatMap(r => r.pubs);
 
     allPubs.forEach(pub => {
-        // Consider a pub compliant if ALL products are compliant (strict) or AVG checks out?
-        // Let's go with: Compliant if ALL products within range.
+        // Compliant if ALL products within range.
         const isCompliant = pub.products.every(p => p.compliant);
         if (isCompliant) compliantCount++;
         else nonCompliantCount++;
@@ -54,7 +52,7 @@ const Dashboard = ({ data, onBack }) => {
 
     // 3. Prepare Data: Average Price per Product
     // We'll just take a few key products to keep it readable
-    const productStats = {}; // { 'Club Beer': { sum: 0, count: 0 } }
+    const productStats = {};
 
     allPubs.forEach(pub => {
         pub.products.forEach(p => {
@@ -77,9 +75,14 @@ const Dashboard = ({ data, onBack }) => {
     return (
         <div className="dashboard-container">
             <div className="dashboard-header">
-                <button className="back-button" onClick={onBack}>
-                    <ArrowLeft size={20} /> Back to Home
-                </button>
+                <div className="nav-group">
+                    <button className="nav-button" onClick={onGoHome}>
+                        <Home size={20} /> Home
+                    </button>
+                    <button className="nav-button secondary" onClick={onBack}>
+                        <ArrowLeft size={20} /> Back
+                    </button>
+                </div>
                 <h1>Analytics Dashboard</h1>
             </div>
 
@@ -90,7 +93,7 @@ const Dashboard = ({ data, onBack }) => {
                 </div>
                 <div className="kpi-card">
                     <h3>Compliance Rate</h3>
-                    <div className="value">
+                    <div className="value" style={{ color: (compliantCount / allPubs.length) > 0.8 ? '#008751' : '#dc2626' }}>
                         {((compliantCount / allPubs.length) * 100).toFixed(1)}%
                     </div>
                 </div>
@@ -106,11 +109,11 @@ const Dashboard = ({ data, onBack }) => {
                     <div className="chart-container">
                         <ResponsiveContainer width="100%" height={300}>
                             <BarChart data={regionData}>
-                                <CartesianGrid strokeDasharray="3 3" />
-                                <XAxis dataKey="name" angle={-45} textAnchor="end" height={80} interval={0} fontSize={10} />
-                                <YAxis />
-                                <Tooltip />
-                                <Bar dataKey="outlets" fill="#FBC02D" />
+                                <CartesianGrid strokeDasharray="3 3" vertical={false} />
+                                <XAxis dataKey="name" angle={-45} textAnchor="end" height={80} interval={0} fontSize={12} tick={{ fill: '#666' }} />
+                                <YAxis tick={{ fill: '#666' }} />
+                                <Tooltip contentStyle={{ borderRadius: '8px', border: 'none', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }} />
+                                <Bar dataKey="outlets" fill="#FFC600" radius={[4, 4, 0, 0]} />
                             </BarChart>
                         </ResponsiveContainer>
                     </div>
@@ -125,9 +128,8 @@ const Dashboard = ({ data, onBack }) => {
                                     data={complianceData}
                                     cx="50%"
                                     cy="50%"
-                                    innerRadius={60}
-                                    outerRadius={80}
-                                    fill="#8884d8"
+                                    innerRadius={80}
+                                    outerRadius={100}
                                     paddingAngle={5}
                                     dataKey="value"
                                 >
@@ -135,8 +137,8 @@ const Dashboard = ({ data, onBack }) => {
                                         <Cell key={`cell-${index}`} fill={COMPLIANCE_COLORS[index % COMPLIANCE_COLORS.length]} />
                                     ))}
                                 </Pie>
-                                <Tooltip />
-                                <Legend />
+                                <Tooltip contentStyle={{ borderRadius: '8px', border: 'none', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }} />
+                                <Legend verticalAlign="bottom" height={36} />
                             </PieChart>
                         </ResponsiveContainer>
                     </div>
@@ -147,11 +149,11 @@ const Dashboard = ({ data, onBack }) => {
                     <div className="chart-container">
                         <ResponsiveContainer width="100%" height={300}>
                             <BarChart data={priceData} layout="vertical">
-                                <CartesianGrid strokeDasharray="3 3" />
-                                <XAxis type="number" domain={[0, 'auto']} />
-                                <YAxis dataKey="name" type="category" width={120} fontSize={10} />
-                                <Tooltip />
-                                <Bar dataKey="avgPrice" fill="#0088FE" name="Avg Price (GHS)" />
+                                <CartesianGrid strokeDasharray="3 3" horizontal={false} />
+                                <XAxis type="number" domain={[0, 'auto']} tick={{ fill: '#666' }} />
+                                <YAxis dataKey="name" type="category" width={100} fontSize={11} tick={{ fill: '#666' }} />
+                                <Tooltip contentStyle={{ borderRadius: '8px', border: 'none', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }} />
+                                <Bar dataKey="avgPrice" fill="#008751" name="Avg Price (GHS)" radius={[0, 4, 4, 0]} />
                             </BarChart>
                         </ResponsiveContainer>
                     </div>

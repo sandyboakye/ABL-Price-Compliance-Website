@@ -231,6 +231,7 @@ function App() {
         <Dashboard
           data={filteredData}
           onBack={() => setCurrentView('home')}
+          onGoHome={handleGoHome}
         />
       ) : (
         <>

@@ -31,9 +31,7 @@ const HomePage = ({ mockData, onGetStarted, onGoDashboard }) => {
                     </div>
 
                     <h1 className="hero-title">Accra Brewery Price Check</h1>
-                    <p className="hero-subtitle">
-                        Monitor and compare product prices across all regions, districts, and outlets in Ghana
-                    </p>
+
 
                     <div className="stats-grid">
                         <div className="stat-card">
