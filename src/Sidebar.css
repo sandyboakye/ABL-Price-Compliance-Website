@@ -429,3 +429,48 @@
     margin-right: 0.25rem;
     opacity: 0.8;
 }
+
+/* Mobile adjustments for products table */
+@media (max-width: 768px) {
+    .products-table thead {
+        display: none;
+        /* Hide headers on small screens */
+    }
+
+    .products-table tbody tr {
+        display: flex;
+        flex-direction: column;
+        padding: var(--spacing-sm);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .products-table td {
+        display: block;
+        padding: 4px 0;
+        border: none;
+        width: 100%;
+        text-align: left;
+    }
+
+    .product-info-cell {
+        margin-bottom: 4px;
+    }
+
+    .price-cell {
+        text-align: right;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        background: rgba(255, 255, 255, 0.03);
+        padding: 8px;
+        border-radius: 8px;
+    }
+
+    .price-cell::before {
+        content: 'Price:';
+        font-size: 0.8rem;
+        color: var(--color-text-muted);
+        margin-right: auto;
+        font-weight: 400;
+    }
+}
