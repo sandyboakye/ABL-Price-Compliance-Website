@@ -1,11 +1,8 @@
 .home-page {
     width: 100%;
-    height: 100vh;
+    height: 100%;
     background: linear-gradient(135deg, #0a1628 0%, #1a2942 50%, #0f1f3a 100%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
+    overflow-y: auto;
     position: relative;
 }
 
@@ -39,6 +36,12 @@
     padding: 2rem;
     position: relative;
     z-index: 1;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0 auto;
+    /* Center horizontally */
 }
 
 .hero-section {
