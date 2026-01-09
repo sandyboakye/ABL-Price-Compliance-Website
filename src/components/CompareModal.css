@@ -1,0 +1,248 @@
+/* Modal Overlay */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    animation: fadeIn var(--transition-base) ease-out;
+}
+
+/* Modal Container */
+.modal-container {
+    background: var(--color-bg-secondary);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-xl), 0 0 40px rgba(0, 0, 0, 0.5);
+    max-width: 960px;
+    width: 95%;
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    animation: slideIn var(--transition-base) ease-out;
+}
+
+/* Modal Header */
+.modal-header {
+    padding: var(--spacing-lg) var(--spacing-xl);
+    background: linear-gradient(135deg, var(--color-bg-tertiary), var(--color-bg-secondary));
+    border-bottom: 1px solid var(--color-border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+}
+
+.modal-header::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--color-primary), transparent);
+    opacity: 0.5;
+}
+
+.modal-header h2 {
+    color: var(--color-primary);
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.close-btn {
+    background: transparent;
+    border: none;
+    color: var(--color-text-muted);
+    font-size: 2rem;
+    line-height: 1;
+    cursor: pointer;
+    transition: color 0.2s;
+    padding: 0 var(--spacing-sm);
+}
+
+.close-btn:hover {
+    color: var(--color-primary);
+    text-shadow: 0 0 8px var(--color-primary);
+}
+
+/* Modal Body */
+.modal-body {
+    padding: var(--spacing-xl);
+    overflow-y: auto;
+    flex: 1;
+    background: var(--color-bg-primary);
+}
+
+/* Comparison Table Wrapper */
+.comparison-table-wrapper {
+    overflow: auto;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: var(--radius-md);
+    background: var(--color-bg-secondary);
+    max-height: 70vh;
+    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.2);
+}
+
+.comparison-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    min-width: 600px;
+}
+
+/* Headers */
+.comparison-table thead {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: var(--color-bg-tertiary);
+}
+
+.comparison-table th {
+    padding: var(--spacing-md) var(--spacing-lg);
+    text-align: left;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    background: var(--color-bg-tertiary);
+    border-bottom: 1px solid var(--color-border);
+    border-right: 1px solid rgba(255, 255, 255, 0.05);
+    vertical-align: top;
+}
+
+.comparison-table th:first-child {
+    position: sticky;
+    left: 0;
+    z-index: 30;
+    border-right: 1px solid var(--color-border);
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.comparison-table th .sub-header {
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 400;
+    color: var(--color-text-muted);
+    margin-top: 4px;
+}
+
+/* Product Column */
+.product-col {
+    position: sticky;
+    left: 0;
+    z-index: 10;
+    background: var(--color-bg-tertiary);
+    /* Slightly lighter than body for contrast */
+    border-right: 1px solid var(--color-border) !important;
+    padding: var(--spacing-lg);
+    vertical-align: middle;
+    width: 200px;
+    min-width: 180px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.p-name {
+    font-weight: 600;
+    color: var(--color-text-primary);
+    font-size: 0.95rem;
+}
+
+.p-cat {
+    color: var(--color-text-muted);
+    font-size: 0.8rem;
+    margin-top: 2px;
+}
+
+/* Data Cells */
+.comparison-table td.price-col {
+    padding: var(--spacing-lg);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    border-right: 1px solid rgba(255, 255, 255, 0.05);
+    background: transparent;
+    vertical-align: top;
+    min-width: 140px;
+    color: var(--color-text-primary);
+}
+
+/* Hover Effects */
+.comparison-table tbody tr:hover td {
+    background-color: rgba(255, 255, 255, 0.03);
+}
+
+.comparison-table tbody tr:hover .product-col {
+    background-color: var(--color-bg-tertiary);
+    filter: brightness(1.1);
+}
+
+/* Price Display Styling */
+.price-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 4px;
+    justify-content: center;
+    height: 100%;
+}
+
+.price-main {
+    font-family: var(--font-mono);
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    text-shadow: 0 0 10px rgba(255, 198, 0, 0.1);
+}
+
+.na {
+    color: var(--color-text-muted);
+    opacity: 0.5;
+}
+
+/* Highest Price Highlight - Subtle Glow */
+.price-col.highest-price {
+    background-color: rgba(239, 68, 68, 0.1) !important;
+    /* Subtle red tint */
+    box-shadow: inset 0 0 10px rgba(239, 68, 68, 0.1);
+}
+
+.highest-label {
+    font-size: 0.65rem;
+    color: var(--color-error);
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 4px;
+    background: rgba(239, 68, 68, 0.1);
+    padding: 2px 6px;
+    border-radius: 4px;
+    border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .modal-container {
+        width: 100%;
+        height: 100%;
+        max-height: 100vh;
+        border-radius: 0;
+        border: none;
+    }
+
+    .modal-body {
+        padding: 0;
+    }
+
+    .comparison-table-wrapper {
+        border: none;
+        border-radius: 0;
+        max-height: calc(100vh - 70px);
+    }
+}
